@@ -1,4 +1,3 @@
-from os import replace
 import string
 
 STOP_WORDS = [
@@ -27,19 +26,33 @@ def print_word_freq(file):
     for char in replace_w_space:
         if char in zero_punctuation:
             zero_punctuation = zero_punctuation.replace(char, " ")
-    word_dict = {}
+    
+    # create and fill word_count dictionary
+    word_count = {}
     word_list = zero_punctuation.split(" ")
+    max_length = 1
     for word in word_list:
         if word in STOP_WORDS:
             continue
         elif word == "":
             continue
-        elif word in word_dict.keys():
-            word_dict[word] += 1
+        elif word in word_count.keys():
+            word_count[word] += 1
         else:
-            word_dict[word] = 1
-    return print(word_dict[''])
+            word_count[word] = 1
+        
+        if len(word) > max_length:
+            max_length = len(word)
+    words_by_freq = sorted(word_count, key=word_count.get, reverse=True)
 
+    for word in words_by_freq:
+        frequency = word_count[word]
+        spaces = (max_length - len(word)) * " "
+        if frequency < 10:
+            stars = "  " + frequency * "*"
+        else:
+            stars = " " + frequency * "*"
+        print(spaces + word + " | " + str(frequency) + stars)
 
 
 if __name__ == "__main__":

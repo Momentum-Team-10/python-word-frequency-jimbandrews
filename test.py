@@ -35,6 +35,7 @@ def print_word_freq(file):
         
     return print(word_dict)
 
+
 print_word_freq()
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
