@@ -17,7 +17,7 @@ def print_word_freq(file):
     lowercase = file_string.lower()
 
     # delete all punctuation
-    punctuation = string.punctuation + "’"
+    punctuation = string.punctuation + "’" + "”" + "“"
     zero_punctuation = lowercase
     for char in punctuation:
         if char in zero_punctuation:
@@ -55,17 +55,45 @@ def print_word_freq(file):
     # create a list of keys sorted in descending order based on their key value
     words_by_freq = sorted(word_count, key=word_count.get, reverse=True)
 
+    # new version to display alphabetically ordered results
+
+    # get max frequency and initialize empty list to fill
+    max_freq = word_count[words_by_freq[0]]
+    frequency_groups = []
+    # fill empty list with empty lists, one for each number from 1 to max_freq
+    while max_freq > 0:
+        frequency_groups.append([])
+        max_freq -= 1
+    # determine which list to put word in based on dict value
+    # subtract value from 0 so that most frequent words are first
     for word in words_by_freq:
-        frequency = word_count[word]
-        # determine number of spaces needed to align the | character
-        spaces = (max_length - len(word)) * " "
-        # determine number of stars and number of spaces to align stars
-        if frequency < 10:
-            stars = "  " + frequency * "*"
-        else:
-            stars = " " + frequency * "*"
-        # finish by printing an f-string for each word
-        print(f" {spaces}{word} | {frequency}{stars}")
+        frequency_groups[0-word_count[word]].append(word)
+    # sort each group in frequency_groups alphabetically then display
+    for group in frequency_groups:
+        group.sort()
+        # display each word in the group
+        for word in group:
+            frequency = word_count[word]
+            spaces = (max_length - len(word)) * " "
+            if frequency < 10:
+                stars = "  " + frequency * "*"
+            else:
+                stars = " " + frequency * "*"
+            print(f" {spaces}{word} | {frequency}{stars}")
+
+
+    # original version to display results
+    # for word in words_by_freq:
+    #     frequency = word_count[word]
+    #     # determine number of spaces needed to align the | character
+    #     spaces = (max_length - len(word)) * " "
+    #     # determine number of stars and number of spaces to align stars
+    #     if frequency < 10:
+    #         stars = "  " + frequency * "*"
+    #     else:
+    #         stars = " " + frequency * "*"
+    #     # finish by printing an f-string for each word
+    #     print(f" {spaces}{word} | {frequency}{stars}")
 
 
 if __name__ == "__main__":
