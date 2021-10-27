@@ -1,9 +1,9 @@
 import string
 
 STOP_WORDS = [
-    'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'has', 'he',
-    'i', 'in', 'is', 'it', 'its', 'of', 'on', 'that', 'the', 'to', 'were',
-    'will', 'with'
+    'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'has',
+    'he', 'i', 'in', 'is', 'it', 'its', 'of', 'on', 'that', 'the', 'to',
+    'were', 'will', 'with'
 ]
 
 
@@ -28,7 +28,7 @@ def print_word_freq(file):
     for char in replace_w_space:
         if char in zero_punctuation:
             zero_punctuation = zero_punctuation.replace(char, " ")
-    
+
     # initialize variables for later, and split my string into a list
     word_count = {}
     max_length = 1
@@ -47,11 +47,11 @@ def print_word_freq(file):
             word_count[word] += 1
         else:
             word_count[word] = 1
-        
+
         # used to find the length of the longest word for later use
         if len(word) > max_length:
             max_length = len(word)
-    
+
     # create a list of keys sorted in descending order based on their key value
     words_by_freq = sorted(word_count, key=word_count.get, reverse=True)
 
