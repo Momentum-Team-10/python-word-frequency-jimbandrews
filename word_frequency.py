@@ -52,13 +52,10 @@ def print_word_freq(file):
         if len(word) > max_length:
             max_length = len(word)
 
-    # create a list of keys sorted in descending order based on their key value
-    words_by_freq = sorted(word_count, key=word_count.get, reverse=True)
 
     # new version to display alphabetically ordered results
-
-    # get max frequency and initialize empty list to fill
-    max_freq = word_count[words_by_freq[0]]
+    all_words = word_count.keys()
+    max_freq = max(word_count.values())
     frequency_groups = []
     # fill empty list with empty lists, one for each number from 1 to max_freq
     while max_freq > 0:
@@ -66,12 +63,11 @@ def print_word_freq(file):
         max_freq -= 1
     # determine which list to put word in based on dict value
     # subtract value from 0 so that most frequent words are first
-    for word in words_by_freq:
+    for word in all_words:
         frequency_groups[0-word_count[word]].append(word)
     # sort each group in frequency_groups alphabetically then display
     for group in frequency_groups:
         group.sort()
-        # display each word in the group
         for word in group:
             frequency = word_count[word]
             spaces = (max_length - len(word)) * " "
@@ -82,7 +78,9 @@ def print_word_freq(file):
             print(f" {spaces}{word} | {frequency}{stars}")
 
 
-    # original version to display results
+    # # original version to display results
+    # # create a list of keys sorted in descending order based on their key value
+    # words_by_freq = sorted(word_count, key=word_count.get, reverse=True)
     # for word in words_by_freq:
     #     frequency = word_count[word]
     #     # determine number of spaces needed to align the | character
