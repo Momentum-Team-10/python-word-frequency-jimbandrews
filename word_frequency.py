@@ -52,7 +52,6 @@ def print_word_freq(file):
         if len(word) > max_length:
             max_length = len(word)
 
-
     # new version to display alphabetically ordered results
     all_words = word_count.keys()
     max_freq = max(word_count.values())
@@ -76,7 +75,6 @@ def print_word_freq(file):
             else:
                 stars = " " + frequency * "*"
             print(f" {spaces}{word} | {frequency}{stars}")
-
 
     # # original version to display results
     # # create a list of keys sorted in descending order based on their key value
